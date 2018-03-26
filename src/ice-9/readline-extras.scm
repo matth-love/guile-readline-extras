@@ -44,15 +44,15 @@
 ;; and the next time you start guile the keybinding C-xc will insert ,sh into the line
 ;; and C-cp will insert parens and move the cursor between them.
 (define (readline-config-set! spec)
-  (if (pair? spec)
-      (cond
-      ((pair? (cdar spec))
-       (%rl-parse-and-bind (format #f "~{\"~a\"~^: ~}"  (car spec)))
-       (readline-config-set! (cdr spec)))
-      ((pair? (car spec))
-       (%rl-parse-and-bind (format #f "~a"  (caar spec)))
-       (readline-config-set! (cdr spec)))
-      (else 
-       (readline-config-set! (cdr spec))))))
+  (for-each
+   (lambda (this-spec)
+     (cond
+      ((= (length this-spec) 1)
+       (format #t "~a" this-spec)
+       (%rl-parse-and-bind (format #f "~a" (car this-spec))))
+      (else
+       (format #t "~{\"~a\"~^: ~}" this-spec)
+       (%rl-parse-and-bind (format #f "~{\"~a\"~^: ~}" this-spec)))))
+   spec))
 
 ;;; End
