@@ -1,0 +1,33 @@
+
+ [ readline-extras ]
+
+---------------------
+
+readline and guile-readline are required for this module.
+
+---------------------
+
+Extra readline-fun for guile repl.
+
+- Scheme Procedure: readline-config-set!
+
+  Configure readline through Guile! 
+  Set readline keybindings/variables/etc. for use in the guile repl.
+
+  Example:
+
+  In your ~/.guile file add:
+
+  (use-modules (ice-9 readline-extras))
+
+  (define my-readline-rc
+    '(("set editing-mode emacs")
+      ("\\C-xc" "(system \"\")\\C-b\\C-b")
+      ("\\C-xp" "()\\C-b")))
+
+  (readline-config-set! my-readline-rc)
+
+  and the next time you start guile the keybinding C-xc will insert (system "") into the line
+  with the cursor between the quotes and C-cp will insert parens and set the cursor between them.
+
+---------------------
