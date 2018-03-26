@@ -2,7 +2,7 @@
 
 ##################
 # Package info
-AC_INIT([guile-readline-kbd],[0.0.1],[matthew.love@colorado.edu])
+AC_INIT([guile-readline-extras],[0.0.1],[matthew.love@colorado.edu])
 
 AC_CONFIG_AUX_DIR([build_aux])
 AM_INIT_AUTOMAKE([gnu std-options -Wall])
