@@ -48,10 +48,8 @@
    (lambda (this-spec)
      (cond
       ((= (length this-spec) 1)
-       (format #t "~a" this-spec)
        (%rl-parse-and-bind (format #f "~a" (car this-spec))))
       (else
-       (format #t "~{\"~a\"~^: ~}" this-spec)
        (%rl-parse-and-bind (format #f "~{\"~a\"~^: ~}" this-spec)))))
    spec))
 
