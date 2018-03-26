@@ -44,13 +44,18 @@
 ;; and the next time you start guile the keybinding C-xc will insert ,sh into the line
 ;; and C-cp will insert parens and move the cursor between them.
 (define (readline-config-set! spec)
+  "- Scheme Procedure: readline-config-set! config-spec
+    config-spec should be a list of configuration specifications
+    For keybindings the format is: '((\"\\C-xp\" \"text-to-insert\"))"
   (for-each
    (lambda (this-spec)
      (cond
       ((= (length this-spec) 1)
-       (%rl-parse-and-bind (format #f "~a" (car this-spec))))
+       (%rl-parse-and-bind 
+	(format #f "~a" (car this-spec))))
       (else
-       (%rl-parse-and-bind (format #f "~{\"~a\"~^: ~}" this-spec)))))
+       (%rl-parse-and-bind 
+	(format #f "~{\"~a\"~^: ~}" this-spec)))))
    spec))
 
 ;;; End
