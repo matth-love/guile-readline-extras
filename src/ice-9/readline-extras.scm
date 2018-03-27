@@ -56,6 +56,7 @@
 (define (readline-config-set! spec)
   "- Scheme Procedure: readline-config-set! config-spec
     `config-spec should be a list of configuration specifications
+    as in a dot inputrc file as specified by readline.
     For keybindings the format is: '((\"\\C-xp\" \"text-to-insert\"))"
   (define (rl-set-string cell)
     (car cell))
@@ -74,7 +75,9 @@
 	      (parse-spec-cell (cdr cell) (string-append str astr)))))
   (for-each
    (lambda (this-cell)
-     (%rl-parse-and-bind (parse-spec-cell this-cell "")))
+     (let ((this-line (parse-spec-cell this-cell "")))
+       (if (> (string-length this-line) 0)
+	   (%rl-parse-and-bind this-line))))
    spec))
 
 ;;; End
