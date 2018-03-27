@@ -24,7 +24,6 @@
 
 (define-module (ice-9 readline-extras)
   #:use-module (ice-9 readline)
-  #:use-module (ice-9 format)
   #:export (readline-config-set!))
 
 (load-extension "libguile-readline-extras" "scm_init_readline_extras")
