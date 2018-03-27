@@ -35,9 +35,7 @@
 ;; on keybindings and setting variables, etc.
 ;; e.g. put the follwing in .guile
 ;;
-;; (use-modules (ice-9 readline)
-;;              (ice-9 readline-extras))
-;; (readline-activate)
+;; (use-modules (ice-9 readline-extras))
 ;;
 ;; (define my-readline-rc
 ;;   '(("set editing-mode emacs")
