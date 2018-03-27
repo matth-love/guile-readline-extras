@@ -48,25 +48,9 @@
 ;;
 ;; (readline-config-set! my-readline-rc)
 ;;
-;; and the next time you start guile the keybinding C-xc will insert (system "") into the line
 ;; with the cursor between the quotes and C-cp will insert parens and set the cursor between them,
 ;; C-cm will insert (use-modules ()) with the cursor between the parens and C-xd will insert a 
 ;; date function and run it, displaying the current-time.
-;; (define my-readline-rc
-;;   '(("set editing-mode emacs")
-;;     ("\\C-xc" ",sh ")
-;;     ("\\C-xm" "(use-modules ())\\C-b\\C-b")
-;;     ("\\C-xp" "()\\C-b")))
-;;
-;; (readline-config-set! my-readline-rc)
-;;
-;; and the next time you start guile the keybinding C-xc will insert ,sh into the line
-;; and C-cp will insert parens and move the cursor between them.
-;;
-;; Also, if you wanted to bind \C-xd to a print and run a date function, using:
-;; "(strftime \"%c\" (localtime (current-time)))\\r" doesn't work.
-;; "(strftime \\\"%c\\\" (localtime (current-time)))\\r" does work.
-;; Also, you could define it before-hand to, say, 'date, and use "(date)\\r" instead...
 (define (readline-config-set! spec)
   "- Scheme Procedure: readline-config-set! config-spec
     `config-spec should be a list of configuration specifications
