@@ -32,30 +32,49 @@
 ;; on keybindings and setting variables, etc.
 ;; e.g. put the follwing in .guile
 ;;
-;; (use-modules (ice-9 readline-extras))
+;; (use-modules (ice-9 readline)
+;;              (ice-9 readline-extras))
+;; (readline-activate)
 ;;
 ;; (define my-readline-rc
 ;;   '(("set editing-mode emacs")
 ;;     ("\\C-xc" ",sh ")
+;;     ("\\C-xm" "(use-modules ())\\C-b\\C-b")
 ;;     ("\\C-xp" "()\\C-b")))
 ;;
 ;; (readline-config-set! my-readline-rc)
 ;;
 ;; and the next time you start guile the keybinding C-xc will insert ,sh into the line
 ;; and C-cp will insert parens and move the cursor between them.
+;;
+;; Using quotes within the text to insert doesn't work.
+;; e.g. if you wanted to bind \C-xd to a print and run a date function, using:
+;; "(strftime \"%c\" (localtime (current-time)))\\r" doesn't work.
+;; "(strftime \\\"%c\\\" (localtime (current-time)))\\r" does work.
+;; Also, you could define it before-hand to, say, 'date, and "(date)\\r" instead...
+;;
 (define (readline-config-set! spec)
   "- Scheme Procedure: readline-config-set! config-spec
-    config-spec should be a list of configuration specifications
+    `config-spec should be a list of configuration specifications
     For keybindings the format is: '((\"\\C-xp\" \"text-to-insert\"))"
+  (define (rl-set-string cell)
+    (car cell))
+  (define (rl-kbd-string cell)
+    (string-append "\"" (car cell) "\""))
+  (define (rl-kbd-init-string cell)
+    (string-append (rl-kbd-string cell) ": "))
+  (define (parse-spec-cell cell str)
+    (if (or (null? cell)
+	    (not (string? (car cell)))) str
+	    (let ((astr (if (= (string-length str) 0)
+			    (if (not (null? (cdr cell))) 
+				(rl-kbd-init-string cell) 
+				(rl-set-string cell))
+			    (rl-kbd-string cell))))
+	      (parse-spec-cell (cdr cell) (string-append str astr)))))
   (for-each
-   (lambda (this-spec)
-     (cond
-      ((= (length this-spec) 1)
-       (%rl-parse-and-bind 
-	(format #f "~a" (car this-spec))))
-      (else
-       (%rl-parse-and-bind 
-	(format #f "~{\"~a\"~^: ~}" this-spec)))))
+   (lambda (this-cell)
+     (%rl-parse-and-bind (parse-spec-cell this-cell "")))
    spec))
 
 ;;; End
