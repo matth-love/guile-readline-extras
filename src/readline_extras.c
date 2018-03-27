@@ -26,14 +26,14 @@ SCM_DEFINE (scm_rl_parse_and_bind, "%rl-parse-and-bind", 1, 0, 0,
 {
   char *line;
   int status;
-  line = scm_to_locale_string( scm_config_line );
-  status = rl_parse_and_bind (line);
 
-  if (status == 0) {
-    return ( SCM_BOOL_T );
-  } else {
-    return ( SCM_BOOL_F );
-  }
+  if (scm_string_p (scm_config_line)) {
+    line = scm_to_locale_string (scm_config_line);
+    status = rl_parse_and_bind (line);
+  } else  status = -1;
+
+  if (status == 0) return (SCM_BOOL_T);
+  else return (SCM_BOOL_F);
 }
 
 void
