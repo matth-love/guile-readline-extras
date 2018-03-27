@@ -27,6 +27,8 @@
 
 (load-extension "libguile-readline-extras" "scm_init_readline_extras")
 
+;; Set readline configurations as from a .inputrc file.
+;;
 ;; `spec should be a list of readline configurations.
 ;; see https://tiswww.cwru.edu/php/chet/readline/readline.html#SEC9 for more information
 ;; on keybindings and setting variables, etc.
@@ -47,12 +49,10 @@
 ;; and the next time you start guile the keybinding C-xc will insert ,sh into the line
 ;; and C-cp will insert parens and move the cursor between them.
 ;;
-;; Using quotes within the text to insert doesn't work.
-;; e.g. if you wanted to bind \C-xd to a print and run a date function, using:
+;; For example, if you wanted to bind \C-xd to a print and run a date function, using:
 ;; "(strftime \"%c\" (localtime (current-time)))\\r" doesn't work.
 ;; "(strftime \\\"%c\\\" (localtime (current-time)))\\r" does work.
-;; Also, you could define it before-hand to, say, 'date, and "(date)\\r" instead...
-;;
+;; Also, you could define it before-hand to, say, 'date, and use "(date)\\r" instead...
 (define (readline-config-set! spec)
   "- Scheme Procedure: readline-config-set! config-spec
     `config-spec should be a list of configuration specifications
