@@ -46,6 +46,7 @@
 ;;
 ;; (readline-config-set! my-readline-rc)
 ;;
+;; and the next time you start guile the keybinding C-xc will insert (system "") into the line
 ;; with the cursor between the quotes and C-cp will insert parens and set the cursor between them,
 ;; C-cm will insert (use-modules ()) with the cursor between the parens and C-xd will insert a 
 ;; date function and run it, displaying the current-time.
