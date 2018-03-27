@@ -19,7 +19,6 @@
 
 #include <libguile.h>
 #include <readline/readline.h>
-#include <readline/history.h>
 
 SCM_DEFINE (scm_rl_parse_and_bind, "%rl-parse-and-bind", 1, 0, 0,
 	    (SCM scm_config_line),
