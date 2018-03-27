@@ -1,6 +1,8 @@
 ;;-*-scheme-*-
 ;;; readline-extras.scm
 ;;
+;; Copyright (C) 2018 by Matthew Love
+;;
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
@@ -49,7 +51,7 @@
 ;; and the next time you start guile the keybinding C-xc will insert ,sh into the line
 ;; and C-cp will insert parens and move the cursor between them.
 ;;
-;; For example, if you wanted to bind \C-xd to a print and run a date function, using:
+;; Also, if you wanted to bind \C-xd to a print and run a date function, using:
 ;; "(strftime \"%c\" (localtime (current-time)))\\r" doesn't work.
 ;; "(strftime \\\"%c\\\" (localtime (current-time)))\\r" does work.
 ;; Also, you could define it before-hand to, say, 'date, and use "(date)\\r" instead...

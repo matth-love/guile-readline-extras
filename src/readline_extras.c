@@ -1,7 +1,8 @@
 /* ----------------------------------------------------------------
  * readline_extras.c 
  *
- * Copyright (C) 2018 by Matthew Love <matthew.love@colorado.edu>
+ * Copyright (C) 2018 by Matthew Love
+ *
  * This file is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -22,7 +23,8 @@
 
 SCM_DEFINE (scm_rl_parse_and_bind, "%rl-parse-and-bind", 1, 0, 0,
 	    (SCM scm_config_line),
-	    "Parse line as if it had been read from the inputrc file and perform any key bindings and variable assignments found.")
+	    "Parse line as if it had been read from the inputrc file \
+and perform any key bindings and variable assignments found.")
 {
   char *line;
   int status;
